@@ -1,1 +1,77 @@
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>A Little Birthday Surprise 💗</title>
+<style>
+* { box-sizing: border-box; }
+body {
+  margin: 0; min-height: 100vh; display: grid;
+  place-items: center; padding: 20px;
+  font-family: Georgia, serif; text-align: center;
+  background: linear-gradient(135deg,#ffe1ed,#f9c7e2,#fff0f6);
+  color: #8b3159;
+}
+.card {
+  width: min(100%,420px); padding: 35px 24px;
+  background: #ffffffd9; border: 2px solid white;
+  border-radius: 28px; box-shadow: 0 12px 35px #bb648333;
+}
+h1 { font-size: 2rem; }
+p { line-height: 1.7; }
+input,button {
+  width: 100%; padding: 14px; margin-top: 12px;
+  border-radius: 14px; font-size: 1rem;
+}
+input { border: 1px solid #e6a3c2; background: white; }
+button {
+  border: 0; background: #df78a7; color: white;
+  cursor: pointer; font-weight: bold;
+}
+#surprise { display: none; }
+.heart { font-size: 42px; }
+</style>
+</head>
+<body>
+<main class="card" id="lock">
+  <div class="heart">🎀💗🔐</div>
+  <h1>A Little Surprise!</h1>
+  <p>Someone special made this just for you.<br>
+  Enter the secret password to open your gift ♡</p>
+  <form id="passwordForm">
+    <input id="password" type="password"
+      placeholder="Enter secret password" required>
+    <button type="submit">UNLOCK MY SURPRISE ♡</button>
+  </form>
+  <p id="error" role="alert"></p>
+</main>
+
+<main class="card" id="surprise">
+  <div class="heart">🎂💖🎉</div>
+  <h1>HAPPY BIRTHDAY! ♡</h1>
+  <p>You are such a special person!</p>
+  <p>May your day be filled with happiness,
+  love, laughter and beautiful memories. 🌷</p>
+  <p>Made with lots of love 💌</p>
+</main>
+
+<script>
+const correctPassword = "pink123";
+
+document.getElementById("passwordForm").addEventListener("submit", function(e) {
+  e.preventDefault();
+  const entered = document.getElementById("password").value;
+  if (entered === correctPassword) {
+    document.getElementById("lock").style.display = "none";
+    document.getElementById("surprise").style.display = "block";
+  } else {
+    document.getElementById("error").textContent =
+      "Oops! Try the password again 💗";
+  }
+});
+</script>
+</body>
+</html>
+
