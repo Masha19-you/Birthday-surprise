@@ -3,73 +3,168 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>A Little Birthday Surprise 💗</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Secret Birthday Surprise 🎀</title>
 <style>
-* { box-sizing: border-box; }
-body {
-  margin: 0; min-height: 100vh; display: grid;
-  place-items: center; padding: 20px;
-  font-family: Georgia, serif; text-align: center;
-  background: linear-gradient(135deg,#ffe1ed,#f9c7e2,#fff0f6);
-  color: #8b3159;
+*{box-sizing:border-box}
+body{
+ margin:0;min-height:100vh;padding:24px;
+ display:flex;align-items:center;justify-content:center;
+ font-family:"Trebuchet MS",sans-serif;color:#8e4265;
+ background:linear-gradient(135deg,#ffe5ef,#ffd1e5,#fff0f6);
 }
-.card {
-  width: min(100%,420px); padding: 35px 24px;
-  background: #ffffffd9; border: 2px solid white;
-  border-radius: 28px; box-shadow: 0 12px 35px #bb648333;
+.card{
+ width:min(100%,1000px);padding:30px;
+ background:#ffffffbd;border:2px solid white;
+ border-radius:32px;box-shadow:0 15px 50px #c76c9630;
 }
-h1 { font-size: 2rem; }
-p { line-height: 1.7; }
-input,button {
-  width: 100%; padding: 14px; margin-top: 12px;
-  border-radius: 14px; font-size: 1rem;
+.layout{display:grid;grid-template-columns:1fr 1fr;gap:30px;align-items:center}
+h1{font-size:clamp(28px,4vw,43px);margin:12px 0}
+p{line-height:1.6}
+.eyebrow{letter-spacing:3px;font-size:12px;color:#c15d8b}
+.dots{display:flex;gap:12px;margin:24px 0}
+.dot{
+ width:18px;height:18px;border-radius:50%;
+ background:#f3c1d7;border:2px solid #e8a1c1;
 }
-input { border: 1px solid #e6a3c2; background: white; }
-button {
-  border: 0; background: #df78a7; color: white;
-  cursor: pointer; font-weight: bold;
+.dot.filled{background:#d95f98}
+.keypad{
+ display:grid;grid-template-columns:repeat(3,1fr);
+ gap:10px;margin-top:18px
 }
-#surprise { display: none; }
-.heart { font-size: 42px; }
+.key{
+ border:0;border-radius:17px;padding:15px 5px;
+ background:#fff0f7;color:#9b426b;
+ font-size:22px;font-weight:bold;cursor:pointer;
+ box-shadow:0 4px 0 #e8b0ca;
+}
+.key:active{transform:translateY(3px);box-shadow:none}
+.action{background:#dc79a5;color:white}
+.cat{
+ width:100%;height:240px;object-fit:cover;
+ border-radius:24px;border:5px solid white;
+ box-shadow:0 8px 25px #d98aaf35;
+}
+.cat-note{background:#fff0f6;padding:12px;border-radius:16px;margin-top:12px}
+.message{color:#bd3977;min-height:24px;font-size:14px}
+#surprise{display:none;text-align:center;padding:25px 10px}
+#surprise h1{color:#d34d8b}
+.gift{font-size:70px}
+@media(max-width:650px){
+ body{padding:12px}
+ .card{padding:20px}
+ .layout{grid-template-columns:1fr;gap:22px}
+ .cat{height:200px}
+ .right{order:-1}
+ h1{font-size:30px}
+ .key{padding:12px 5px}
+}
 </style>
 </head>
 <body>
-<main class="card" id="lock">
-  <div class="heart">🎀💗🔐</div>
-  <h1>A Little Surprise!</h1>
-  <p>Someone special made this just for you.<br>
-  Enter the secret password to open your gift ♡</p>
-  <form id="passwordForm">
-    <input id="password" type="password"
-      placeholder="Enter secret password" required>
-    <button type="submit">UNLOCK MY SURPRISE ♡</button>
-  </form>
-  <p id="error" role="alert"></p>
-</main>
+<main class="card">
+<section id="locked" class="layout">
+  <div class="left">
+    <div style="font-size:35px">🎀 💗</div>
+    <div class="eyebrow">A SECRET LITTLE GIFT</div>
+    <h1>You've got a<br>surprise! ♡</h1>
+    <p>Someone special made something just for you.</p>
+    <p>Enter the secret code to unlock your gift! 🔐</p>
 
-<main class="card" id="surprise">
-  <div class="heart">🎂💖🎉</div>
-  <h1>HAPPY BIRTHDAY! ♡</h1>
-  <p>You are such a special person!</p>
-  <p>May your day be filled with happiness,
-  love, laughter and beautiful memories. 🌷</p>
-  <p>Made with lots of love 💌</p>
+    <div class="dots" id="dots" aria-label="Password digits">
+      <span class="dot"></span><span class="dot"></span>
+      <span class="dot"></span><span class="dot"></span>
+    </div>
+    <div class="message" id="message" aria-live="polite">
+      Hint: four little numbers ♡
+    </div>
+  </div>
+
+  <div class="right">
+    <img class="cat"
+      src="https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?auto=format&amp;fit=crop&amp;w=700&amp;q=85"
+      alt="A cute cat">
+    <div class="cat-note" style="text-align:center">
+      🐾 <strong>meow meow!</strong> 🐾
+      <p style="margin:5px">Enter your secret code below ♡</p>
+    </div>
+
+    <div class="keypad" aria-label="Number keypad">
+      <button class="key" data-num="1">1</button>
+      <button class="key" data-num="2">2</button>
+      <button class="key" data-num="3">3</button>
+      <button class="key" data-num="4">4</button>
+      <button class="key" data-num="5">5</button>
+      <button class="key" data-num="6">6</button>
+      <button class="key" data-num="7">7</button>
+      <button class="key" data-num="8">8</button>
+      <button class="key" data-num="9">9</button>
+      <button class="key" id="clear">⌫</button>
+      <button class="key" data-num="0">0</button>
+      <button class="key action" id="unlock">♡</button>
+    </div>
+  </div>
+</section>
+
+<section id="surprise">
+  <div class="gift">🎁🐱💗</div>
+  <h1>YOU UNLOCKED IT!</h1>
+  <h2>HAPPY BIRTHDAY!! 🎂</h2>
+  <p>A little reminder that you are loved, appreciated, and truly special.</p>
+  <p>May your day be full of smiles, sweet memories, and magical moments. 🌷</p>
+  <p>Made with lots of love ♡</p>
+</section>
 </main>
 
 <script>
-const correctPassword = "pink123";
+const correctCode = "1234";
+let entered = "";
 
-document.getElementById("passwordForm").addEventListener("submit", function(e) {
-  e.preventDefault();
-  const entered = document.getElementById("password").value;
-  if (entered === correctPassword) {
-    document.getElementById("lock").style.display = "none";
-    document.getElementById("surprise").style.display = "block";
-  } else {
-    document.getElementById("error").textContent =
-      "Oops! Try the password again 💗";
+const dots = document.querySelectorAll(".dot");
+const message = document.getElementById("message");
+
+function updateDots(){
+  dots.forEach((dot,i)=>dot.classList.toggle("filled",i<entered.length));
+}
+
+function addDigit(digit){
+  if(entered.length >= 4) return;
+  entered += digit;
+  updateDots();
+  message.textContent = "Almost there... 💗";
+  if(entered.length === 4) checkCode();
+}
+
+function checkCode(){
+  if(entered === correctCode){
+    document.getElementById("locked").style.display="none";
+    document.getElementById("surprise").style.display="block";
+  }else{
+    message.textContent="Oopsie! Wrong code. Try again ♡";
+    entered="";
+    updateDots();
   }
+}
+
+document.querySelectorAll("[data-num]").forEach(button=>{
+  button.addEventListener("click",()=>addDigit(button.dataset.num));
+});
+
+document.getElementById("clear").addEventListener("click",()=>{
+  entered=entered.slice(0,-1);
+  updateDots();
+  message.textContent="Try again, cutie ♡";
+});
+
+document.getElementById("unlock").addEventListener("click",checkCode);
+
+document.addEventListener("keydown",event=>{
+  if(/^[0-9]$/.test(event.key)) addDigit(event.key);
+  if(event.key==="Backspace"){
+    entered=entered.slice(0,-1);
+    updateDots();
+  }
+  if(event.key==="Enter") checkCode();
 });
 </script>
 </body>
